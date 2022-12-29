@@ -3,6 +3,7 @@ package com.practice.board.repository;
 import com.practice.board.config.JpaConfig;
 import com.practice.board.domain.Article;
 import com.practice.board.domain.ArticleComment;
+import com.practice.board.domain.UserAccount;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,11 +20,14 @@ class JpaRepositoryTest {
 
     private final ArticleRepository articleRepository;
     private final ArticleCommentRepository articleCommentRepository;
+    private final UserAccountRepository userAccountRepository;
 
     JpaRepositoryTest(@Autowired ArticleRepository articleRepository,
-                      @Autowired ArticleCommentRepository articleCommentRepository) {
+                      @Autowired ArticleCommentRepository articleCommentRepository,
+                      @Autowired UserAccountRepository userAccountRepository) {
         this.articleRepository = articleRepository;
         this.articleCommentRepository = articleCommentRepository;
+        this.userAccountRepository = userAccountRepository;
     }
 
     @DisplayName("select 테스트")
@@ -49,9 +53,10 @@ class JpaRepositoryTest {
     void givenTestData_whenInserting_thenWorksFine() {
         // Given
         long previousCount = articleRepository.count();
+        UserAccount userAccount = userAccountRepository.save(UserAccount.of("newUser", "pw", null, null, null));
 
         // When
-        Article savedArticle = articleRepository.save(Article.of("new title", "new content", null));
+        Article savedArticle = articleRepository.save(Article.of(userAccount, "new title", "new content", null));
 
         // Then
         assertThat(articleRepository.count()).isEqualTo(previousCount + 1);
@@ -63,14 +68,14 @@ class JpaRepositoryTest {
         // Given
         Article article = articleRepository.findById(1L).orElseThrow();
         String updatedHashtag = "#springboot";
-        article.setHashTag(updatedHashtag);
+        article.setHashtag(updatedHashtag);
 
         // When
         Article savedArticle = articleRepository.saveAndFlush(article);
 
 
         // Then
-        assertThat(savedArticle).hasFieldOrPropertyWithValue("hashTag", updatedHashtag);
+        assertThat(savedArticle).hasFieldOrPropertyWithValue("hashtag", updatedHashtag);
     }
 
     @DisplayName("delete 테스트")
