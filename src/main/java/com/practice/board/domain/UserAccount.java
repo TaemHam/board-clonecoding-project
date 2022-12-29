@@ -15,7 +15,7 @@ import java.util.Objects;
         @Index(columnList = "createdBy")
 })
 @Entity
-public class UserAccount extends Writable {
+public class UserAccount extends Creatable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
