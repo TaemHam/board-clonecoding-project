@@ -19,6 +19,7 @@ public record ArticleResponse(
     }
 
     public static ArticleResponse from(ArticleDto dto) {
+        // 게시판 작성자는 닉네임, 없으면 유저 아이디로
         String nickname = dto.userAccountDto().nickname();
         if (nickname == null || nickname.isBlank()) {
             nickname = dto.userAccountDto().userId();

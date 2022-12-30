@@ -10,7 +10,7 @@ import com.practice.board.domain.Article;
 import com.practice.board.domain.UserAccount;
 import com.practice.board.domain.type.SearchType;
 import com.practice.board.dto.ArticleDto;
-import com.practice.board.dto.ArticleUpdateDto;
+import com.practice.board.dto.ArticleWithCommentsDto;
 import com.practice.board.dto.UserAccountDto;
 import com.practice.board.repository.ArticleRepository;
 import java.time.LocalDateTime;
@@ -56,14 +56,14 @@ class ArticleServiceTest {
         SearchType searchType = SearchType.TITLE;
         String searchKeyword = "title";
         Pageable pageable = Pageable.ofSize(20);
-        given(articleRepository.findByTitle(searchKeyword, pageable)).willReturn(Page.empty());
+        given(articleRepository.findByTitleContaining(searchKeyword, pageable)).willReturn(Page.empty());
 
         // When
         Page<ArticleDto> articles = sut.searchArticles(searchType, searchKeyword, pageable);
 
         // Then
         assertThat(articles).isEmpty();
-        then(articleRepository).should().findByTitle(searchKeyword, pageable);
+        then(articleRepository).should().findByTitleContaining(searchKeyword, pageable);
     }
 
     @DisplayName("게시글을 조회하면, 게시글을 반환한다.")
@@ -75,7 +75,7 @@ class ArticleServiceTest {
         given(articleRepository.findById(articleId)).willReturn(Optional.of(article));
 
         // When
-        ArticleDto dto = sut.getArticle(articleId);
+        ArticleWithCommentsDto dto = sut.getArticle(articleId);
 
         // Then
         assertThat(dto)
@@ -123,7 +123,7 @@ class ArticleServiceTest {
         // Given
         Article article = createArticle();
         ArticleDto dto = createArticleDto("새 타이틀", "새 내용", "#springboot");
-        given(articleRepository.save(any(Article.class))).willReturn(article);
+        given(articleRepository.getReferenceById(dto.id())).willReturn(article);
 
         // When
         sut.updateArticle(dto);
@@ -202,6 +202,7 @@ class ArticleServiceTest {
 
     private UserAccountDto createUserAccountDto() {
         return UserAccountDto.of(
+                1L,
                 "id1",
                 "password",
                 "id1@mail.com",
