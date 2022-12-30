@@ -18,23 +18,23 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 @ToString
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
-public class Writable {
+public class Creatable {
 
     @DateTimeFormat(iso = ISO.DATE_TIME)
     @CreatedDate
     @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt; // 생성일시
+    protected LocalDateTime createdAt; // 생성일시
 
     @CreatedBy
     @Column(nullable = false, updatable = false, length = 100)
-    private String createdBy; // 생성자
+    protected String createdBy; // 생성자
 
     @DateTimeFormat(iso = ISO.DATE_TIME)
     @LastModifiedDate
     @Column(nullable = false)
-    private LocalDateTime modifiedAt; // 수정일시
+    protected LocalDateTime modifiedAt; // 수정일시
 
     @LastModifiedBy
     @Column(nullable = false, length = 100)
-    private String modifiedBy; // 수정자
+    protected String modifiedBy; // 수정자
 }
