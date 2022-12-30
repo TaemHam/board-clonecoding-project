@@ -10,6 +10,7 @@ import java.util.Objects;
 @Getter
 @ToString(callSuper = true)
 @Table(indexes = {
+        @Index(columnList = "userId"),
         @Index(columnList = "email", unique = true),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
@@ -20,10 +21,10 @@ public class UserAccount extends Creatable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Id
-    @Column(length = 50)
-    private String userId;
 
+    @Setter
+    @Column(nullable = false, length = 50)
+    private String userId;
     @Setter
     @Column(nullable = false) private String userPassword;
 
