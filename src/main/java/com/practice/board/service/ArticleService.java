@@ -27,15 +27,13 @@ public class ArticleService {
             return articleRepository.findAll(pageable).map(ArticleDto::from);
         }
 
-        switch (searchType) {
+        return switch (searchType) {
             case TITLE -> articleRepository.findByTitleContaining(searchKeyword, pageable).map(ArticleDto::from);
             case CONTENT -> articleRepository.findByContentContaining(searchKeyword, pageable).map(ArticleDto::from);
             case ID -> articleRepository.findByUserAccount_UserIdContaining(searchKeyword, pageable).map(ArticleDto::from);
             case NICKNAME -> articleRepository.findByUserAccount_NicknameContaining(searchKeyword, pageable).map(ArticleDto::from);
             case HASHTAG -> articleRepository.findByHashtag("#" + searchKeyword, pageable).map(ArticleDto::from); //TODO: "#"을 넣으면 두 개가 들어가 검색이 안되는 경우가 있음. 수정 필요.
-        }
-
-        return Page.empty();
+        };
     }
 
     @Transactional(readOnly = true)
