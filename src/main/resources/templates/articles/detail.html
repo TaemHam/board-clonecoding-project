@@ -64,6 +64,7 @@
                     <button class="btn btn-primary" id="comment-submit" type="submit">쓰기</button>
                 </div>
             </form>
+
             <ul id="article-comments" class="row col-md-10 col-lg-8 pt-3">
                 <li>
                     <form class="comment-form">
@@ -78,7 +79,7 @@
                                     다람쥐 헌 쳇바퀴 타고파
                                 </p>
                             </div>
-                            <div class="col-2 mb-3">
+                            <div class="col-2 mb-3 align-self-center">
                                 <button type="submit" class="btn btn-outline-danger" id="delete-comment-button">삭제</button>
                             </div>
                         </div>
@@ -86,13 +87,18 @@
                 </li>
                 <li>
                     <div class="row">
-                        <strong>을</strong>
-                        <small>
-                            <time>2022-01-01</time>
-                        </small>
-                        <p>
-                            아야어여오요우유으이
-                        </p>
+                        <div class="col-md-10 col-lg-9">
+                            <strong>을</strong>
+                            <small>
+                                <time>2022-01-01</time>
+                            </small>
+                            <p>
+                                아야어여오요우유으이
+                            </p>
+                        </div>
+                        <div class="col-2 mb-3 align-self-center">
+                            <button type="submit" class="btn btn-outline-danger" hidden>삭제</button>
+                        </div>
                     </div>
                 </li>
             </ul>

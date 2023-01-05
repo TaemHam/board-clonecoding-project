@@ -1,11 +1,11 @@
 insert into user_account (user_id, user_password, nickname, email, memo, created_at, created_by, modified_at, modified_by) values
-    ('id1', 'awdr1234', '갑', 'id1@mail.com', 'I am Uno.', now(), '갑', now(), '갑')
+    ('id1', '{noop}asdf1234', '갑', 'id1@mail.com', 'hello.', now(), '갑', now(), '갑')
 ;
 insert into user_account (user_id, user_password, nickname, email, memo, created_at, created_by, modified_at, modified_by) values
-    ('id2', 'qsef1234', '을', 'id2@mail.com', 'I am Uno2.', now(), '을', now(), '을')
+    ('id2', '{noop}qsef1234', '을', 'id2@mail.com', 'world.', now(), '을', now(), '을')
 ;
 insert into user_account (user_id, user_password, nickname, email, memo, created_at, created_by, modified_at, modified_by) values
-    ('id3', 'zscf1234', '병', 'id3@mail.com', 'I am Uno2.', now(), '병', now(), '병')
+    ('id3', '{noop}zscf1234', '병', 'id3@mail.com', 'spring.', now(), '병', now(), '병')
 ;
 
 insert into article (user_id, title, content, hashtag, created_at, created_by, modified_at, modified_by) values ('id1', 'Suspendisse potenti.', 'Aenean lectus.', 'Indigo', '2022-07-19 05:15:03', 'Ainsley', '2022-07-18 19:37:58', 'Alex');
