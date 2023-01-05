@@ -104,7 +104,6 @@ public class ArticleController {
                                 @AuthenticationPrincipal BoardPrincipal boardPrincipal,
                                 ArticleRequest articleRequest
                                 ) {
-        // TODO: 인증 정보를 넣어줘야 한다.
         articleService.updateArticle(articleId, articleRequest.toDto(boardPrincipal.toDto()));
 
         return "redirect:/articles/" + articleId;
