@@ -1,25 +1,34 @@
 package com.practice.board.controller;
 
+import static org.mockito.BDDMockito.then;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.practice.board.config.SecurityConfig;
+import com.practice.board.config.TestSecurityConfig;
+import com.practice.board.service.ArticleService;
+import com.practice.board.service.PaginationService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 @DisplayName("View 컨트롤러 - 인증")
-@Import(SecurityConfig.class)
+@Import(TestSecurityConfig.class)
 @WebMvcTest(Void.class)
 public class AuthControllerTest {
 
     private final MockMvc mvc;
+
+    @MockBean
+    private ArticleService articleService;
+    @MockBean
+    private PaginationService paginationService;
 
     AuthControllerTest(@Autowired MockMvc mvc) {
         this.mvc = mvc;
@@ -33,8 +42,9 @@ public class AuthControllerTest {
         // When & Then
         mvc.perform(get("/login"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
-                .andDo(MockMvcResultHandlers.print());
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
+        then(articleService).shouldHaveNoInteractions();
+        then(paginationService).shouldHaveNoInteractions();
     }
 
 }
