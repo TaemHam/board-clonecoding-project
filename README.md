@@ -29,8 +29,8 @@ Spring Boot
 
 * QueryDSL 5.0.0
 * Bootstrap 5.2.0-Beta1
-* Heroku
+* Cloudtype
 
 ## 데모 페이지
 
-* https://project-board-taemham.herokuapp.com/
+* https://port-0-board-clonecoding-project-1luhct24lcjzlhii.gksl2.cloudtype.app/
