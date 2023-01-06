@@ -50,8 +50,8 @@ public class UserAccount extends Creatable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UserAccount userAccount)) return false;
-        return userId != null && userId.equals(userAccount.userId);
+        if (!(o instanceof UserAccount that)) return false;
+        return this.getUserId() != null && this.getUserId().equals(that.getUserId());
     }
 
     @Override
