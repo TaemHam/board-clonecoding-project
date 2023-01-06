@@ -12,7 +12,7 @@ logging:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/board
+    url: jdbc:mysql://svc.gksl2.cloudtype.app:30889/board
     username: taemham
     password: TesTpw!@#
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -36,12 +36,3 @@ spring:
   thymeleaf3:
     decoupled-logic: true
 #    cache: false
-
----
-
-spring:
-  config.activate.on-profile: heroku
-  datasource:
-    url: ${JAWSDB_URL}
-  jpa.hibernate.ddl-auto: create
-  sql.init.mode: always
