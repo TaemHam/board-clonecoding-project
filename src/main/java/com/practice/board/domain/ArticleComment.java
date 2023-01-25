@@ -55,14 +55,14 @@ public class ArticleComment extends Creatable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof ArticleComment articleComment)) {
+        if (!(o instanceof ArticleComment that)) {
             return false;
         }
-        return id != null && id.equals(articleComment.id);
+        return this.getId() != null && this.getId().equals(that.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(this.getId());
     }
 }

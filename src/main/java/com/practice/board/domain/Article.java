@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,7 +38,7 @@ public class Article extends Creatable {
 
     @Setter
     @JoinColumn(name = "userId")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private UserAccount userAccount; // 유저
 
     @Setter
@@ -74,14 +75,14 @@ public class Article extends Creatable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Article article)) {
+        if (!(o instanceof Article that)) {
             return false;
         }
-        return id != null && id.equals(article.id);
+        return this.getId() != null && this.getId().equals(that.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(this.getId());
     }
 }
